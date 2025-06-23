@@ -1,0 +1,64 @@
+Menu 1
+
+P - Point Based
+C - Category (Percentage) Based
+G - GPA Calculator
+D - Display Current Save
+S - Save to save.txt (NO AUTO-SAVE)
+L - Load a Save (NO AUTO-SAVE)
+R - HARD RESET (wipe save.txt and/or program memory)
+X - Exit Program
+
+	Menu 2-1 (P)
+
+		N - Create a New Class
+		A - Add Scores to a Class
+		D - Delete Score(s) from a Class
+		R - Remove a Class
+		L - Display List of Classes (of this type)
+		B - Back
+		
+			ability to stop and cancel (if you haven't started) at any time for all menus
+
+	Menu 2-2 (C)
+
+		N - Create a New Class
+		A - Add Scores to a Class
+		D - Delete Score(s) from a Class
+		C - Change a Class Percentage
+		L - Display List of Classes (of this type)
+		B - Back
+		
+			ability to stop and cancel (if you haven't started) at any time for all menus
+
+	Menu 2-3 (G)
+	
+		A - Add a Class
+		D - Delete a Class
+		L - Display List of Classes (of this type)
+		B - Back
+		
+			ability to stop and cancel (if you haven't started) at any time for all menus
+
+	Menu 2-4 (D)
+
+		Display Menu 1
+
+	Menu 2-5 (S)
+
+		N - Save w/ New Name
+		E - Update name save in save.txt (creates new if [save] doesn't exist)
+		B - Back
+		
+			ability to stop and cancel (if you haven't started) at any time for all menus
+
+	Menu 2-6 (L)
+
+		B - Back
+
+	Menu 2-7 (R)
+
+		Y - Reset Current Program Memory
+		LoL - Reset save.txt
+		RESET+EVERYTHING - Reset Program Memory & save.txt
+		B - Back

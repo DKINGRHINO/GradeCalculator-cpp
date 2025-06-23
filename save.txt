@@ -1,0 +1,51 @@
+{Save Name} - (name)
+#p #c #g
+(name)
++percentage
+percentqge
+A
+#letters
+A 90(<=)X(<=)100
+B 80(<=)X(<)90
+C 70(<=)X(<)80
+D 60(<=)X(<)70
+F 50(<=)X(<)60
+#scores
+45 48
+30 35
+40 45
+
+(name)
++percentage
+percentage
+A
+#letters
+A 90(<=)X(<=)100
+B 80(<=)X(<)90
+C 70(<=)X(<)80
+D 60(<=)X(<)70
+F 50(<=)X(<)60
+#categories
+(cname)
+catPercentage
++percentage
+#scores
+14 15
+13 16
+(cname)
+catPercentage
++percentage
+#scores
+16.6 20
+14 15
+(cname)
+catPercentage
++percentage
+#scores
+13 17
+44.5 55
+
+(name) gpa earned credit hours
+(name) gpa earned credit hours
+(name) gpa earned credit hours
+(name) gpa earned credit hours
