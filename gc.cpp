@@ -18,6 +18,9 @@ int main()
 void basicGradeCalculator()
 {
     int numCategories;
+    double gradeCalculation = 0;
+    double categoryGradeCalculationNumerator = 0;
+    double categoryGradeCalculationDenominator = 0;
 
     // Ask user for the number of grade categories
     std::cout << "Enter the number of categories (i.e. tests are 20%, hw is 80%, so there are 2 categories): ";
@@ -34,23 +37,24 @@ void basicGradeCalculator()
 
     int * numGrades = new int [numCategories];
 
-    for(int i = 0; i < numCategories; ++i)
-    {
-        grades[i] = NULL;
-        perfectGrades[i] = NULL;
-        numGrades[i] = 0;
-    }
-
-    // Dynamically allocate memory for an array of doubles to hold the category weights
-    double * categoryWeights = NULL;
-    categoryWeights = new double[numCategories];
-    
     // Dynamically allocate memory for arrays of strings to keep track of the names
     std::string ** assignmentNames = NULL;
     assignmentNames = new std::string * [numCategories];
 
     std::string * categoryNames = NULL;
     categoryNames = new std::string[numCategories];
+
+    for(int i = 0; i < numCategories; ++i)
+    {
+        grades[i] = NULL;
+        perfectGrades[i] = NULL;
+        assignmentNames[i] = NULL;
+        numGrades[i] = 0;
+    }
+
+    // Dynamically allocate memory for an array of doubles to hold the category weights
+    double * categoryWeights = NULL;
+    categoryWeights = new double[numCategories];
 
     // Ask user for the names of each category
     std::cout << "Enter each category name, then press enter (enter them separately)." << std::endl;
@@ -68,6 +72,7 @@ void basicGradeCalculator()
 
     // Ask user for the weights of each category
     std::cout << "Enter the double percentage weights of each category respectively (enter them separately)." << std::endl;
+    std::cout << "Ensure they add up to 100%" << std::endl;
 
     // Get weights for each category from user as doubles
     for(int i = 0; i < numCategories; ++i)
@@ -79,13 +84,42 @@ void basicGradeCalculator()
 
     int menuChoice = 0;
 
-    while(menuChoice != numCategories + 2)
+    while(menuChoice != numCategories + 1) // While choice is not exit
     {
+        // Display the menu and save the returned choice
         menuChoice = basicGradeCalcMenuSys(numCategories, grades, categoryWeights, categoryNames);
 
-        if(menuChoice == numCategories + 1) // Calculate grade percentage based on grades entered
+        if(menuChoice == numCategories) // Calculate grade percentage based on grades entered
         {
+            std::cout << "-----------------------------------------" << std::endl; // Formatting bar
 
+            // Reset for new calculation
+            gradeCalculation = 0;
+
+            // Compute the percentage grade based on current grades for all categories
+            for(int curCategory = 0; curCategory < numCategories; ++curCategory)
+            {
+                // Reset for new calculation
+                categoryGradeCalculationNumerator = 0;
+                categoryGradeCalculationDenominator = 0;
+
+                // The summation of all the numerators and the summation of all the denominators is saved
+                for(int curGrade = 0; curGrade < numGrades[curCategory]; ++curGrade)
+                {
+                    categoryGradeCalculationNumerator += grades[curCategory][curGrade];
+                    categoryGradeCalculationDenominator += perfectGrades[curCategory][curGrade];
+                }
+
+                // Increment grade calculation by category contribution if there are grade(s)
+                if(numGrades[curCategory] != 0)
+                    gradeCalculation += categoryGradeCalculationNumerator / categoryGradeCalculationDenominator * 100 / categoryWeights[curCategory];
+            }
+
+            // Display calculated grade
+            std::cout << "Grade: " << std::fixed << std::setprecision(2) << gradeCalculation << "%" << std::endl;
+
+            std::cout << "-----------------------------------------" << std::endl; // Formatting bar
+            std::cout << std::endl; // Formatting space
         }
         else // Add, remove, or edit grades in a category
         {
@@ -93,7 +127,20 @@ void basicGradeCalculator()
         }
     }
 
-    // Todo - Delete allocated memory
+    // Delete allocated memory
+    for(int curCategory = 0; curCategory < numCategories; ++curCategory)
+    {
+        delete[] grades[curCategory];
+        delete[] perfectGrades[curCategory];
+        delete[] assignmentNames[curCategory];
+    }
+
+    delete[] grades;
+    delete[] perfectGrades;
+    delete[] assignmentNames;
+    delete[] numGrades;
+    delete[] categoryNames;
+    delete[] categoryWeights;
 }
 
 // Print a menu of all categories and support going into each category and changing grades and weight percentage
@@ -111,7 +158,7 @@ int basicGradeCalcMenuSys(int numCategories, double ** grades, double * category
     // Display the category names and percentages in the menu
     for(int categoryNum = 1; categoryNum <= numCategories; ++categoryNum)
     {
-        std::cout << "  " << categoryNum << ". " << categoryNames[categoryNum - 1] << "(" << categoryWeights[categoryNum - 1] << "%)" << std::endl;
+        std::cout << "  " << categoryNum << ". " << categoryNames[categoryNum - 1] << " (" << categoryWeights[categoryNum - 1] << "%)" << std::endl;
     }
 
     std::cout << "  " << numCategories + 1 << ". " << "Calculate grades based on current information" << std::endl;
@@ -164,7 +211,7 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
             for(int i = 0; i < numGrades[menuChoice]; ++i)
             {
                 std::cout << "  " << i + 1 << ". " << assignmentNames[menuChoice][i] << " - " << grades[menuChoice][i] << " out of " << perfectGrades[menuChoice][i] 
-                << " = " << std::fixed << std::setprecision(2) << grades[menuChoice][i]/perfectGrades[menuChoice][i] / 100 << "%" << std::endl;
+                << " = " << std::fixed << std::setprecision(2) << grades[menuChoice][i] / perfectGrades[menuChoice][i] * 100 << "%" << std::endl;
             }
         }
 
