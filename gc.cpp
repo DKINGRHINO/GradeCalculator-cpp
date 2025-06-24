@@ -202,7 +202,7 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
     {
         // Display grades in a formatted way
         std::cout << "-----------------------------------------" << std::endl; // Formatting bar
-        std::cout << "Grades: ";
+        std::cout << "Grades: " << std::endl;
 
         if(numGrades[menuChoice] == 0)
         {
