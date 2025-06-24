@@ -170,7 +170,7 @@ int basicGradeCalcMenuSys(int numCategories, double ** grades, double * category
     std::cout << "-----------------------------------------" << std::endl; // Formatting bar
 
     // Prompt user to give menu choice
-    std::cout << "Enter and integer: ";
+    std::cout << "Enter an integer: ";
     
     // Get menu choice from user
     std::cin >> menuChoice;
