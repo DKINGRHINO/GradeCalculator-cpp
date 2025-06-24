@@ -57,7 +57,7 @@ void basicGradeCalculator()
     categoryWeights = new double[numCategories];
 
     // Ask user for the names of each category
-    std::cout << "Enter each category name, then press enter (enter them separately)." << std::endl;
+    std::cout << "Enter each category name, then press enter (enter them separately):" << std::endl;
 
     std::string curStringName;
 
@@ -88,6 +88,9 @@ void basicGradeCalculator()
     {
         // Display the menu and save the returned choice
         menuChoice = basicGradeCalcMenuSys(numCategories, grades, categoryWeights, categoryNames);
+
+        // Break out of loop now if choice is to exit
+        if(menuChoice == numCategories + 1) break;
 
         if(menuChoice == numCategories) // Calculate grade percentage based on grades entered
         {
