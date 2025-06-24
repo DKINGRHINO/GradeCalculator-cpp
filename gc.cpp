@@ -202,7 +202,7 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
     {
         // Display grades in a formatted way
         std::cout << "-----------------------------------------" << std::endl; // Formatting bar
-        std::cout << "Grades: " << std::endl;
+        std::cout << "Grades for " << categoryNames[menuChoice] << ":" << std::endl;
 
         if(numGrades[menuChoice] == 0)
         {
@@ -312,7 +312,7 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
                     for(int i = 0; i < numGrades[menuChoice]; ++i)
                     {
                         if(i == gradeMenuChoice) continue; // Skip copying removed grade
-
+                        
                         // Place new grade in proper index
                         if(i > gradeMenuChoice)
                         {
@@ -327,25 +327,25 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
                             newPerfectGrades[i] = perfectGrades[menuChoice][i];
                             newAssignmentNames[i] = assignmentNames[menuChoice][i];
                         }
-
-                        // Delete old grade arrays
-                        delete[] grades[menuChoice];
-                        delete[] perfectGrades[menuChoice];
-                        delete[] assignmentNames[menuChoice];
-                        
-                        // Reassign old grade arrays
-                        grades[menuChoice] = newGrades;
-                        perfectGrades[menuChoice] = newPerfectGrades;
-                        assignmentNames[menuChoice] = newAssignmentNames;
-
-                        // Set newGrade arrays to null again
-                        newGrades = nullptr;
-                        newPerfectGrades = nullptr;
-                        newAssignmentNames = nullptr;
-                        
-                        // Decrement number of grades
-                        numGrades[menuChoice]--;
                     }
+
+                    // Delete old grade arrays
+                    delete[] grades[menuChoice];
+                    delete[] perfectGrades[menuChoice];
+                    delete[] assignmentNames[menuChoice];
+                    
+                    // Reassign old grade arrays
+                    grades[menuChoice] = newGrades;
+                    perfectGrades[menuChoice] = newPerfectGrades;
+                    assignmentNames[menuChoice] = newAssignmentNames;
+
+                    // Set newGrade arrays to null again
+                    newGrades = nullptr;
+                    newPerfectGrades = nullptr;
+                    newAssignmentNames = nullptr;
+                    
+                    // Decrement number of grades
+                    numGrades[menuChoice]--;
                 }
 
                 std::cout << std::endl; // Formatting space
