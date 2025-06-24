@@ -115,7 +115,7 @@ void basicGradeCalculator()
 
                 // Increment grade calculation by category contribution if there are grade(s)
                 if(numGrades[curCategory] != 0)
-                    gradeCalculation += categoryGradeCalculationNumerator / categoryGradeCalculationDenominator * 100 / categoryWeights[curCategory];
+                    gradeCalculation += categoryGradeCalculationNumerator / categoryGradeCalculationDenominator * categoryWeights[curCategory];
             }
 
             // Display calculated grade
@@ -372,7 +372,7 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
                         std::cin >> grades[menuChoice][gradeMenuChoice];
                     }
 
-                    std::cout << "Would you like to edit the perfect score (i.e. If x/y = z%, do you want to edit y)? Enter y for yes or n for no";
+                    std::cout << "Would you like to edit the perfect score (i.e. If x/y = z%, do you want to edit y)? Enter y for yes or n for no: ";
                     std::cin >> gradeMenuCharChoice;
 
                     if(gradeMenuCharChoice == 'y')
