@@ -29,31 +29,31 @@ void basicGradeCalculator()
     std::cin >> numCategories;
 
     // Dynamically allocate memory for an array of arrays of double values for grades
-    double ** grades = NULL;
+    double ** grades = nullptr;
     grades = new double * [numCategories];
 
-    double ** perfectGrades = NULL;
+    double ** perfectGrades = nullptr;
     perfectGrades = new double * [numCategories];
 
     int * numGrades = new int [numCategories];
 
     // Dynamically allocate memory for arrays of strings to keep track of the names
-    std::string ** assignmentNames = NULL;
+    std::string ** assignmentNames = nullptr;
     assignmentNames = new std::string * [numCategories];
 
-    std::string * categoryNames = NULL;
+    std::string * categoryNames = nullptr;
     categoryNames = new std::string[numCategories];
 
     for(int i = 0; i < numCategories; ++i)
     {
-        grades[i] = NULL;
-        perfectGrades[i] = NULL;
-        assignmentNames[i] = NULL;
+        grades[i] = nullptr;
+        perfectGrades[i] = nullptr;
+        assignmentNames[i] = nullptr;
         numGrades[i] = 0;
     }
 
     // Dynamically allocate memory for an array of doubles to hold the category weights
-    double * categoryWeights = NULL;
+    double * categoryWeights = nullptr;
     categoryWeights = new double[numCategories];
 
     // Ask user for the names of each category
@@ -193,9 +193,9 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
     char gradeMenuCharChoice;
 
     // For use in changing grades
-    double * newGrades = NULL;
-    double * newPerfectGrades = NULL;
-    std::string * newAssignmentNames = NULL;
+    double * newGrades = nullptr;
+    double * newPerfectGrades = nullptr;
+    std::string * newAssignmentNames = nullptr;
 
     // While choice is not to exit menu
     while(categoryMenuChoice != 4)
@@ -281,9 +281,9 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
                 assignmentNames[menuChoice] = newAssignmentNames;
 
                 // Set newGrade arrays to null again
-                newGrades = NULL;
-                newPerfectGrades = NULL;
-                newAssignmentNames = NULL;
+                newGrades = nullptr;
+                newPerfectGrades = nullptr;
+                newAssignmentNames = nullptr;
 
                 // Increment number of grades
                 numGrades[menuChoice]++;
@@ -299,7 +299,7 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
                 else
                 {
                     // Prompt user to enter the grade to edit
-                    std::cout << "Enter the number corresponding to the grade which you wish to remove: " << std::endl;
+                    std::cout << "Enter the number corresponding to the grade which you wish to remove: ";
                     std::cin >> gradeMenuChoice; // Get grade to remove
                     gradeMenuChoice--; // Allign w/ 0-indexed
 
@@ -339,9 +339,9 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
                         assignmentNames[menuChoice] = newAssignmentNames;
 
                         // Set newGrade arrays to null again
-                        newGrades = NULL;
-                        newPerfectGrades = NULL;
-                        newAssignmentNames = NULL;
+                        newGrades = nullptr;
+                        newPerfectGrades = nullptr;
+                        newAssignmentNames = nullptr;
                         
                         // Decrement number of grades
                         numGrades[menuChoice]--;
