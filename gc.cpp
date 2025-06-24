@@ -292,7 +292,7 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
             }
             else if(categoryMenuChoice == 2) // Remove a grade
             {
-                if(numGrades[menuChoice] = 0)
+                if(numGrades[menuChoice] == 0)
                 {
                     std::cout << "You have no grades to remove!" << std::endl;
                 }
@@ -352,7 +352,7 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
             }
             else // Edit grade
             {
-                if(numGrades[menuChoice] = 0)
+                if(numGrades[menuChoice] == 0)
                 {
                     std::cout << "You have no grades to edit!" << std::endl;
                 }
