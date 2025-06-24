@@ -243,7 +243,7 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
         
         if(categoryMenuChoice != 4) // Not exiting menu
         {
-            if(categoryMenuChoice == 3) // Add a grade
+            if(categoryMenuChoice == 1) // Add a grade
             {
                 // Allocate space for new arrays of grades
                 newGrades = new double [numGrades[menuChoice] + 1];
