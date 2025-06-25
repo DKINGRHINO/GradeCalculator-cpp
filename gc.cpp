@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <limits>
 
 void basicGradeCalculator();
 int basicGradeCalcMenuSys(int numCategories, double ** grades, double * categoryWeights, std::string * categoryNames);
@@ -26,7 +27,12 @@ void basicGradeCalculator()
     std::cout << "Enter the number of categories (i.e. tests are 20%, hw is 80%, so there are 2 categories): ";
 
     // Get input from user
-    std::cin >> numCategories;
+    while(!(std::cin >> numCategories))
+    {
+        std::cin.clear(); // clear the error flag
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+        std::cout << "Invalid input! Try again: "; // Prompt user to try again
+    }
 
     // Dynamically allocate memory for an array of arrays of double values for grades
     double ** grades = nullptr;
@@ -57,7 +63,7 @@ void basicGradeCalculator()
     categoryWeights = new double[numCategories];
 
     // Ask user for the names of each category
-    std::cout << "Enter each category name, then press enter (enter them separately):" << std::endl;
+    std::cout << "Enter each category name (one word) (no spaces), then press enter (enter them separately):" << std::endl;
 
     std::string curStringName;
 
@@ -71,13 +77,18 @@ void basicGradeCalculator()
     std::cout << std::endl; // Formatting space
 
     // Ask user for the weights of each category
-    std::cout << "Enter the double percentage weights of each category respectively (enter them separately)." << std::endl;
+    std::cout << "Enter the double percentage weights of each category respectively (enter them separately) (e.g., input = \"20.5\" to represent 20.5%, then press enter and enter the next percentage)." << std::endl;
     std::cout << "Ensure they add up to 100%" << std::endl;
 
     // Get weights for each category from user as doubles
     for(int i = 0; i < numCategories; ++i)
     {
-        std::cin >> categoryWeights[i];
+        while(!(std::cin >> categoryWeights[i]))
+        {
+            std::cin.clear(); // clear the error flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+            std::cout << "Invalid input! Try again: "; // Prompt user to try again
+        }
     }
 
     std::cout << std::endl; // Formatting space
@@ -173,7 +184,12 @@ int basicGradeCalcMenuSys(int numCategories, double ** grades, double * category
     std::cout << "Enter an integer: ";
     
     // Get menu choice from user
-    std::cin >> menuChoice;
+    while(!(std::cin >> menuChoice))
+    {
+        std::cin.clear(); // clear the error flag
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+        std::cout << "Invalid input! Try again: "; // Prompt user to try again
+    }
 
     // On final program exit, no space
     if(menuChoice != numCategories + 2)
@@ -237,7 +253,12 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
         std::cout << "Enter and integer: ";
     
         // Get menu choice from user
-        std::cin >> categoryMenuChoice;
+        while(!(std::cin >> categoryMenuChoice))
+        {
+            std::cin.clear(); // clear the error flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+            std::cout << "Invalid input! Try again: "; // Prompt user to try again
+        }
 
         std::cout << std::endl; // Formatting space
         
@@ -259,16 +280,30 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
                 }
 
                 // Prompt the user to enter the assignment name
-                std::cout << "Enter the assignment name: ";
+                std::cout << "Enter the assignment name (no spaces): ";
                 std::cin >> newAssignmentNames[numGrades[menuChoice]];
 
                 // Prompt the user for the score
-                std::cout << "Enter the score as a double (i.e. If x/y = z%, what is x): ";
-                std::cin >> newGrades[numGrades[menuChoice]];
+                std::cout << "Enter the score as a double (i.e., if x / y * 100 = z%, what is x): ";
+
+                // Get the score from the user
+                while(!(std::cin >> newGrades[numGrades[menuChoice]]))
+                {
+                std::cin.clear(); // clear the error flag
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+                std::cout << "Invalid input! Try again: "; // Prompt user to try again
+                }
 
                 // Prompt the user for the perfect score
-                std::cout << "Enter the perfect score as a double (i.e. If x/y = z%, what is y): ";
-                std::cin >> newPerfectGrades[numGrades[menuChoice]];
+                std::cout << "Enter the perfect score as a double (i.e., if x / y * 100 = z%, what is y): ";
+
+                // Get the perfect score from the user
+                while(!(std::cin >> newPerfectGrades[numGrades[menuChoice]]))
+                {
+                    std::cin.clear(); // clear the error flag
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+                    std::cout << "Invalid input! Try again: "; // Prompt user to try again
+                }
 
                 // Delete old grade arrays
                 delete[] grades[menuChoice];
@@ -300,7 +335,15 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
                 {
                     // Prompt user to enter the grade to edit
                     std::cout << "Enter the number corresponding to the grade which you wish to remove: ";
-                    std::cin >> gradeMenuChoice; // Get grade to remove
+                    
+                    // Get grade to remove
+                    while(!(std::cin >> gradeMenuChoice))
+                    {
+                        std::cin.clear(); // clear the error flag
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+                        std::cout << "Invalid input! Try again: "; // Prompt user to try again
+                    }
+
                     gradeMenuChoice--; // Allign w/ 0-indexed
 
                     // Allocate space for new arrays of grades
@@ -360,25 +403,65 @@ void updateCategoryGrades(std::string ** assignmentNames, double ** grades, doub
                 {
                     // Prompt user to enter the grade to edit
                     std::cout << "Enter the number corresponding to the grade which you wish to edit: " << std::endl;
-                    std::cin >> gradeMenuChoice; // Get grade to edit
-                    gradeMenuChoice--; // Allign w/ 0-indexed
 
-                    std::cout << "Would you like to edit YOUR score (i.e. If x/y = z%, do you want to edit x)? Enter y for yes or n for no: ";
-                    std::cin >> gradeMenuCharChoice;
-
-                    if(gradeMenuCharChoice == 'y')
+                    // Get grade to edit
+                    while(!(std::cin >> gradeMenuChoice))
                     {
-                        std::cout << "Enter the new grade: ";
-                        std::cin >> grades[menuChoice][gradeMenuChoice];
+                        std::cin.clear(); // clear the error flag
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+                        std::cout << "Invalid input! Try again: "; // Prompt user to try again
                     }
 
-                    std::cout << "Would you like to edit the perfect score (i.e. If x/y = z%, do you want to edit y)? Enter y for yes or n for no: ";
-                    std::cin >> gradeMenuCharChoice;
+                    gradeMenuChoice--; // Allign w/ 0-indexed
+
+                    // Prompt user to decide if they'd like to edit x in x / y * 100 = z% (their grade on the assignent)
+                    std::cout << "Would you like to edit YOUR score (i.e. If x / y * 100 = z%, do you want to edit x)? Enter y for yes or n for no: ";
+
+                    // Get menu choice from user
+                    while(!(std::cin >> gradeMenuCharChoice))
+                    {
+                        std::cin.clear(); // clear the error flag
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+                        std::cout << "Invalid input! Try again: "; // Prompt user to try again
+                    }
 
                     if(gradeMenuCharChoice == 'y')
                     {
+                        // Prompt user to enter the new grade for x in x / y * 100 = z% (their grade)
                         std::cout << "Enter the new grade: ";
-                        std::cin >> perfectGrades[menuChoice][gradeMenuChoice];
+
+                        // Get score from user
+                        while(!(std::cin >> grades[menuChoice][gradeMenuChoice]))
+                        {
+                            std::cin.clear(); // clear the error flag
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+                            std::cout << "Invalid input! Try again: "; // Prompt user to try again
+                        }
+                    }
+
+                    // Prompt user to decide if they'd like to edit y in x / y * 100 = z% (their grade on the assignent)
+                    std::cout << "Would you like to edit the perfect score (i.e. If x / y * 100 = z%, do you want to edit y)? Enter y for yes or n for no: ";
+
+                    // Get menu choice from user
+                    while(!(std::cin >> gradeMenuCharChoice))
+                    {
+                        std::cin.clear(); // clear the error flag
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+                        std::cout << "Invalid input! Try again: "; // Prompt user to try again
+                    }
+
+                    if(gradeMenuCharChoice == 'y')
+                    {
+                        // Prompt user to enter the new grade for y in x / y * 100 = z% (their grade)
+                        std::cout << "Enter the new grade: ";
+
+                        // Get score from user
+                        while(!(std::cin >> perfectGrades[menuChoice][gradeMenuChoice]))
+                        {
+                            std::cin.clear(); // clear the error flag
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard bad input
+                            std::cout << "Invalid input! Try again: "; // Prompt user to try again
+                        }
                     }
                 }
 
