@@ -1,0 +1,43 @@
+1. The ability to save to and load from a save file between sessions
+	- Using a self-describing data serialization format of my own making I'll have an option to write
+	  to a save file and another option to read from that save file
+	
+	1.1 The saving could be automatic with every change
+		- A save function would overwrite the data in the save file every change
+		- It's worth noting that since we'd be overwriting all the data every change, this would be
+		  inefficient/overkill, but for out use case it doesn't really matter becuase it would work
+	
+	1.2 Multiple save files
+		- Each save file would represent a class and you would have the option to load an existing save,
+		  create a new save, and delete a save
+		- When you first load the program and when you delete a save you shouldn't have any save seletced
+		- The program should make it clear that you're in a save or RAM and which one that is
+		- A file which should always exist when there is at least one save (or at least one save was created
+		  in the past) is the "saves.txt" file which will, using a self-describing data serialization format
+		  of my own making, save the names of existing saves (or at least ones that should exist within
+		  the directory)
+	1.3 Save data integrity check
+		- Would involve parsing all save files and "saves.txt" to makes sure that none of the data is corrupted
+		- This feature would involve a LOT of work
+		- The save data integrity check should 
+		- The save data integrity check could print a list of what corrupted data was deleted
+		
+		1.3.1 The save data integrity check is automatically called
+2. A formatting and format content upgrade
+	- Name of program on launch
+	- My name as in "by Christopher Otto" on launch
+	- Any formatting changes that would make things easier to read
+		- Potentially add data to the screen like category percentages
+		- Potentially get rid of the calculate current grade button and replace it with an automatically
+		  updating version
+3. Flat percentage increases
+	- A flat percentage increases (FPI) (e.g., if FPI = 1%, and grade w/o FPI is 77%, then grade with FPI
+	  is FPI + grade = newGrade => 1$ + 77% = 78%)
+	  
+	3.1 FPIs for individual categories
+		- If a category is 20% of your grade and you add and FPI of 1% to that category when you have a
+		  100% within that category, then you'll have a 101% within that category which you would then
+		  apply to the calculations to get your final grade
+4. Increased input flexibility
+	- Allow for user to enter input all on one line (space separated) or on separate lines (ignore spaces)
+	- Continue to allow for user to accidentally type an extra space after something (remove the space)

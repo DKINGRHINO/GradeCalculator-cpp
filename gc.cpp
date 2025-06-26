@@ -24,7 +24,7 @@ void basicGradeCalculator()
     double categoryGradeCalculationDenominator = 0;
 
     // Ask user for the number of grade categories
-    std::cout << "Enter the number of categories (i.e. tests are 20%, hw is 80%, so there are 2 categories): ";
+    std::cout << "Enter the number of categories (i.e., tests are 20%, hw is 80%, so there are 2 categories): ";
 
     // Get input from user
     while(!(std::cin >> numCategories))
