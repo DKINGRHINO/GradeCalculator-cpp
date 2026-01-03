@@ -1,13 +1,23 @@
+/*============================================================================
+ |       Author:  Christopher Otto
+ |     Language:  c++
+ |   To Compile:  g++ gc.cpp -o "Grade Calculator"
+ |   To Execute:  c++    -> ./"Grade Calculator"
+ +===========================================================================*/
+
+// Preprocessor directives
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <iomanip>
 #include <limits>
 
+// Prototypes
 void basicGradeCalculator();
 int basicGradeCalcMenuSys(int numCategories, double ** grades, double * categoryWeights, std::string * categoryNames);
 void updateCategoryGrades(std::string ** assignmentNames, double ** grades, double ** perfectGrades, int menuChoice, std::string * categoryNames, int * numGrades, int numCategories);
 
+// Function definitions
 int main()
 {
     basicGradeCalculator();
